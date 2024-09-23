@@ -59,7 +59,7 @@ contract Staking is Ownable {
     }
 
     function withdraw(address token, uint amount) public {
-        require(amount >= userTransactionReceipt[token][msg.sender], "Invalid amount");
+        require(amount <= userTransactionReceipt[token][msg.sender], "Invalid amount");
         Token storage stakedToken = tokenDetails[token];
         userAmount[token][msg.sender] -= amount;
         stakedToken.totalInvested -= amount;
